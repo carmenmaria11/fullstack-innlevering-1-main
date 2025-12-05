@@ -1,0 +1,35 @@
++--------------------+                 +----------------------+
+|      TABLES        |                 |       MENU_ITEMS     |
++--------------------+                 +----------------------+
+| PK table_id        |                 | PK item_id           |
+| table_number       |                 | name                 |
+| capacity           |                 | description          |
++--------------------+                 | price                |
+           FK                          +----------------------+
+            | 
+            | 
+            | 
+            v 
++---------------------------+
+|         BOOKINGS          |
++---------------------------+
+| PK booking_id             |
+| FK table_id → TABLES      |
+| customer_name             |
+| phone                     |
+| booking_datetime          |
+| num_people                |
+| comment                   |
++---------------------------+
+
+
++---------------------------+
+|        EMPLOYEES          |
++---------------------------+
+| PK employee_id            |
+| first_name                |
+| last_name                 |
+| role                      |
+| email                     |
+| password_hash             |
++---------------------------+
