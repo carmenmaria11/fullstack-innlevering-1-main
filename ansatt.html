@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansatt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Tangen Torv</div>
+    <nav>
+        <a href="index.html">Hjem</a>
+        <a href="meny.html">Meny</a>
+        <a href="booking.html">Bestill bord</a>
+        <a href="gavekort.html">Gavekort</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="ansatt.html">Ansatt</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Ansatt innlogging</h1>
+
+    <form id="login">
+        <label>Brukernavn</label>
+        <input type="text">
+
+        <label>Passord</label>
+        <input type="password">
+
+        <button class="btn">Logg inn</button>
+    </form>
+
+    <div id="panel" style="display:none;">
+        <h2>Reservasjoner</h2>
+
+        <table>
+            <tr>
+                <th>Navn</th>
+                <th>Telefon</th>
+                <th>Dato</th>
+                <th>Tid</th>
+            </tr>
+            <tbody id="bookings"></tbody>
+        </table>
+
+        <h2 style="margin-top:50px;">Vaktplan</h2>
+
+        <table>
+            <tr>
+                <th>Dag</th>
+                <th>Vakt</th>
+            </tr>
+            <tbody id="shifts"></tbody>
+        </table>
+
+        <h3 id="total" style="margin-top:20px;"></h3>
+    </div>
+</div>
+
+<script>
+const reservasjoner = [
+    {navn:"Ola", tlf:"90000000", dato:"12.12.2025", tid:"18:00"},
+    {navn:"Kari", tlf:"91111111", dato:"13.12.2025", tid:"19:00"}
+];
+
+const vakter = {
+    "Mandag": "17:00 - 21:00",
+    "Tirsdag": "Fri",
+    "Onsdag": "17:00 - 21:00",
+    "Torsdag": "17:00 - 22:00",
+    "Fredag": "18:00 - 23:00",
+    "Lørdag": "18:00 - 23:00",
+    "Søndag": "Fri"
+};
+
+document.getElementById("login").onsubmit = e => {
+    e.preventDefault();
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("panel").style.display = "block";
+
+    let r = "";
+    reservasjoner.forEach(x => {
+        r += "<tr><td>"+x.navn+"</td><td>"+x.tlf+"</td><td>"+x.dato+"</td><td>"+x.tid+"</td></tr>";
+    });
+    document.getElementById("bookings").innerHTML = r;
+
+    let s = "";
+    let total = 0;
+    for (const dag in vakter) {
+        const vakt = vakter[dag];
+        if (vakt !== "Fri") total++;
+        s += "<tr><td>"+dag+"</td><td>"+vakt+"</td></tr>";
+    }
+    document.getElementById("shifts").innerHTML = s;
+
+    document.getElementById("total").innerText = "Antall vakter denne uken: " + total;
+};
+</script>
+
+</body>
+</html>
